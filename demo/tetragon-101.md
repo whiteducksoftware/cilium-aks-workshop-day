@@ -1,4 +1,4 @@
-# Tetragon 101
+# Getting started with Tetragon
 
 ## Deny 'cat' on a specific file
 

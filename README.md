@@ -1,6 +1,6 @@
 # Cilium & AKS Workshop Day
 
-This repository contains the material for our Cilium & AKS workshop Day.
+This repository contains the material for our Cilium & AKS Workshop Day.
 
 ## Slides
 
