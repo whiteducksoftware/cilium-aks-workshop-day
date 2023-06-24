@@ -24,30 +24,7 @@ Review the logs:
 kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout | tetra getevents -o compact
 ```
 
-## Deny writing a specific file
-
-Next deploy the policy and another a busybox:
-
-```bash
-kubectl apply -f ../src/write-file-deny.yaml
-
-kubectl run -i --tty busybox-$RANDOM --image=busybox --restart=Never -- sh
-```
-
-Now, try to write a file:
-
-```bash
-echo "test" > /tmp/test
-echo "test" > /tmp/testfile
-```
-
-Review the logs:
-
-```bash
-kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout | tetra getevents -o compact
-```
-
-## Deny writing a specific locl disk
+## Deny writing a specific local disk
 
 Again deploy the policy and a busybox (this time with `--privileged=true`):
 
@@ -63,6 +40,29 @@ Now, try to write a file:
 mkdir -p /mnt/host
 mount /dev/sda1 /mnt/host
 mount
+```
+
+Review the logs:
+
+```bash
+kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout | tetra getevents -o compact
+```
+
+## Deny writing a specific file
+
+Next deploy the policy and another a busybox:
+
+```bash
+kubectl apply -f ../src/write-file-deny.yaml
+
+kubectl run -i --tty busybox-$RANDOM --image=busybox --restart=Never -- sh
+```
+
+Now, try to write a file:
+
+```bash
+echo "test" > /tmp/test
+echo "test" > /tmp/testfile
 ```
 
 Review the logs:
