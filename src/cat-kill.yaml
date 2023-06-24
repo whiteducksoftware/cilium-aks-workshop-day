@@ -1,0 +1,25 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: "cat-deny"
+spec:
+  kprobes:
+  - call: "sys_openat"
+    syscall: true
+    args:
+    - index: 0
+      type: "int"
+    - index: 1
+      type: "string"
+    selectors:
+    - matchBinaries:
+      - operator: In
+        values:
+        - "/bin/cat"
+      matchArgs:
+      - index: 1
+        operator: "Equal"
+        values:
+        - "/tmp/myfile\0"
+      matchActions:
+      - action: Sigkill
