@@ -4,7 +4,7 @@ This repository contains the material for our Cilium & AKS Workshop Day.
 
 ## Slides
 
-The slides are available here.
+The slides are available [here](./aks-cilium-workshop-day-tetragon.pdf).
 
 ## Demo: Getting started with Tetragon
 
