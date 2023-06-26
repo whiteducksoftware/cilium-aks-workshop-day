@@ -24,7 +24,7 @@ Review the logs:
 kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout | tetra getevents -o compact
 ```
 
-## Deny writing a specific local disk
+## Deny mounting a specific local disk
 
 Again deploy the policy and a busybox (this time with `--privileged=true`):
 
