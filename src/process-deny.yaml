@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicyNamespaced
+metadata:
+  name: "process-deny"
+  namespace: "log4shell"
+spec:
+  kprobes:
+  - call: "__x64_sys_execve"
+    syscall: true 
+    selectors:
+    - matchPIDs:
+      - operator: NotIn
+        followForks: false
+        isNamespacePID: true 
+        values:
+        - 1
+      matchActions:
+      - action: Sigkill
