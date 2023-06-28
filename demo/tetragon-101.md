@@ -1,5 +1,13 @@
 # Getting started with Tetragon
 
+## Inspect Tracingpolicy
+
+```bash
+kubectl api-resources
+
+kubectl explain tracingpolicy.spec.kprobes
+```
+
 ## Deny 'cat' on a specific file
 
 First deploy the policy and a busybox to play around with:
@@ -16,6 +24,7 @@ Then, try to read a file:
 echo "test" > /tmp/myfile
 cat /tmp/myfile
 less /tmp/myfile
+
 ```
 
 Review the logs:
@@ -61,7 +70,7 @@ kubectl run -i --tty busybox-$RANDOM --image=busybox --restart=Never -- sh
 Now, try to write a file:
 
 ```bash
-echo "test" > /tmp/test
+echo "test" >> /tmp/test
 echo "test" > /tmp/testfile
 ```
 

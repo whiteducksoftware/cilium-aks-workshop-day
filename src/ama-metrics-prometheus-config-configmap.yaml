@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+data:
+  prometheus-config: |-
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+    - job_name: tetragon
+      scrape_interval: 30s
+      static_configs:
+        - targets: ['tetragon.kube-system.svc.cluster.local:2112']
+metadata:
+  name: ama-metrics-prometheus-config
+  namespace: kube-system

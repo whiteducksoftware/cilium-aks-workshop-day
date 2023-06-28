@@ -13,3 +13,7 @@ Find all details [here](demo/tetragon-101.md).
 ## Demo: Prevent Log4Shell attack with Tetragon
 
 Find all details [here](demo/log4shell.md).
+
+## Demo: Awareness and Observability
+
+Find all details [here](demo/observability.md).
