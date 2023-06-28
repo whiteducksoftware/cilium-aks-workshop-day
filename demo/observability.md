@@ -25,7 +25,7 @@ ContainerLogV2
 
 ### View shell executions
 
-```kusto
+```Kusto
 ContainerLogV2
 | where PodNamespace == "kube-system"
 | where PodName startswith "tetragon"
