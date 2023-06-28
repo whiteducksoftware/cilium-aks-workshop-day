@@ -23,6 +23,22 @@ ContainerLogV2
 | project TimeGenerated, name, namespace, arguments, binary
 ```
 
+### View shell executions
+
+```kusto
+ContainerLogV2
+| where PodNamespace == "kube-system"
+| where PodName startswith "tetragon"
+| where ContainerName startswith "export-stdout"
+| where LogMessage has "process_exec"
+| evaluate bag_unpack(LogMessage)
+| evaluate bag_unpack(process_exec)
+| evaluate bag_unpack(process)
+| evaluate bag_unpack(pod)
+| where binary == '/bin/sh' or binary == '/bin/bash'
+| project TimeGenerated, name, namespace, binary
+```
+
 ### View Syscalls from Tracing policies
 
 ```Kusto
@@ -53,23 +69,6 @@ ContainerLogV2
 | evaluate bag_unpack(pod)
 | where action == "KPROBE_ACTION_SIGKILL"
 | where namespace == "log4shell"
-| summarize count() by bin(TimeGenerated, 5m), action
+| summarize count() by binary, TimeGenerated
 | project TimeGenerated, Count=count_
-```
-
-```Kusto
-ContainerLogV2
-| where PodNamespace == "kube-system"
-| where PodName startswith "tetragon"
-| where ContainerName startswith "export-stdout"
-| project TimeGenerated, PodName, LogMessage
-| where LogMessage has "process_kprobe"
-| evaluate bag_unpack(LogMessage)
-| evaluate bag_unpack(process_kprobe)
-| evaluate bag_unpack(process)
-| evaluate bag_unpack(pod)
-| where action == "KPROBE_ACTION_SIGKILL"
-| where namespace == "log4shell"
-| summarize Count=count() by action
-| project Count
 ```
