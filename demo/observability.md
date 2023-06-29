@@ -8,7 +8,7 @@
 1. Enable scraping of Tetragon metrics via Prometheus config = `kubectl apply -f ../src/ama-metrics-prometheus-config.yaml`
 1. Verify that the Tetragon target is up = `kubectl port-forward pods/ama-metrics-5bb5b47b97-vtw2p 9090` & http://localhost:9090/targets
 
-### View process executions
+## View process executions
 
 ```Kusto
 ContainerLogV2
@@ -23,7 +23,7 @@ ContainerLogV2
 | project TimeGenerated, name, namespace, arguments, binary
 ```
 
-### View shell executions
+## View shell executions
 
 ```Kusto
 ContainerLogV2
@@ -39,7 +39,7 @@ ContainerLogV2
 | project TimeGenerated, name, namespace, binary
 ```
 
-### View Syscalls from Tracing policies
+## View Syscalls from Tracing policies
 
 ```Kusto
 ContainerLogV2
@@ -54,7 +54,7 @@ ContainerLogV2
 | project TimeGenerated, name, namespace, action, function_name, arguments, binary
 ```
 
-### Alert on SIGKILL
+## Alert on SIGKILL
 
 ```Kusto
 ContainerLogV2
@@ -72,3 +72,9 @@ ContainerLogV2
 | summarize count() by binary, TimeGenerated
 | project TimeGenerated, Count=count_
 ```
+
+## Useful links
+
+- [Tetragon documentation](https://tetragon.cilium.io/docs/overview/)
+- [Tracing Policy examples](https://github.com/cilium/tetragon/tree/main/examples/tracingpolicy)
+- [Tetragon announcement](https://isovalent.com/blog/post/2022-05-16-tetragon/)
