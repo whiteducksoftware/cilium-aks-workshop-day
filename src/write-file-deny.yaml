@@ -18,9 +18,9 @@ spec:
         values:
         - "/tmp/testfile"
     - matchActions:
-      - action: UnfollowFD
+      - action: FollowFD
         argFd: 0
-        argName: 0
+        argName: 1
   - call: "do_dup2"
     syscall: false
     args:
