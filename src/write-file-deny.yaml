@@ -17,7 +17,7 @@ spec:
         operator: "Equal"
         values:
         - "/tmp/testfile"
-    - matchActions:
+      matchActions:
       - action: FollowFD
         argFd: 0
         argName: 1
@@ -61,7 +61,12 @@ spec:
     - index: 2
       type: "size_t"
     selectors:
-    - matchArgs:
+    - matchPIDs:
+      - operator: NotIn
+        values:
+        - 0
+        - 1
+      matchArgs:
       - index: 0
         operator: "Equal"
         values:
